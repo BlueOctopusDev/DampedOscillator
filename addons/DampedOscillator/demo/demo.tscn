@@ -1,0 +1,114 @@
+[gd_scene load_steps=5 format=3 uid="uid://q3062gl06bw8"]
+
+[ext_resource type="Script" path="res://addons/DampedOscillator/demo/demo.gd" id="1_okv2c"]
+[ext_resource type="Texture2D" uid="uid://dl20mx7w3rhi1" path="res://addons/DampedOscillator/demo/bouncing-spring.svg" id="2_tev7a"]
+[ext_resource type="FontFile" uid="uid://bhr1emrasny2w" path="res://addons/DampedOscillator/demo/Montserrat.ttf" id="3_vi402"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r304p"]
+font = ExtResource("3_vi402")
+font_size = 32
+
+[node name="Demo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_okv2c")
+
+[node name="Values" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "spring: 200
+damp: 10
+velocity: 15"
+label_settings = SubResource("LabelSettings_r304p")
+
+[node name="ScaleFactors" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "scale_factors
+sprite1: 0.75
+sprite2: 100.0"
+label_settings = SubResource("LabelSettings_r304p")
+horizontal_alignment = 2
+
+[node name="SpritesContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpritesContainer"]
+layout_mode = 2
+
+[node name="Scale" type="TextureRect" parent="SpritesContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+texture = ExtResource("2_tev7a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rotation" type="TextureRect" parent="SpritesContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+texture = ExtResource("2_tev7a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -170.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PressMe" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vi402")
+theme_override_font_sizes/font_size = 64
+text = "Press me"
+
+[node name="TweakersContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spring" type="HSlider" parent="HBoxContainer/TweakersContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+max_value = 350.0
+value = 200.0
+scrollable = false
+
+[node name="Damp" type="HSlider" parent="HBoxContainer/TweakersContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+min_value = 3.0
+max_value = 50.0
+value = 10.0
+
+[node name="Velocity" type="HSlider" parent="HBoxContainer/TweakersContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+max_value = 50.0
+value = 15.0
+
+[connection signal="pressed" from="HBoxContainer/PressMe" to="." method="_on_press_me_pressed"]
+[connection signal="value_changed" from="HBoxContainer/TweakersContainer/Spring" to="." method="_on_spring_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/TweakersContainer/Damp" to="." method="_on_damp_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/TweakersContainer/Velocity" to="." method="_on_velocity_value_changed"]
