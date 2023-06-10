@@ -13,7 +13,7 @@ config_version=5
 config/name="DampedOscillator"
 run/main_scene="res://addons/DampedOscillator/demo/demo.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://addons/DampedOscillator/demo/bouncing-spring.svg"
 
 [autoload]
 

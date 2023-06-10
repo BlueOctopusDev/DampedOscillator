@@ -1,5 +1,7 @@
 extends Control
 
+# Demo video: https://youtu.be/GRZUQI-A0mc
+
 # animate(node, propertie, string, damp, velocity, scale_factor)
 # animate(node, string, float, float, float, float)
 
