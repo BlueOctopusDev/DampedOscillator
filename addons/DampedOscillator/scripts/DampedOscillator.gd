@@ -23,13 +23,17 @@ func animate(node, propertie: String, string: float, damp: float, velocity: floa
 	# Queue system
 	for animation in get_children():
 		if animation.node == node and animation.propertie == propertie:
-			if !queue_sysem_enabled: return
-			
+			if !queue_sysem_enabled:
+				i.original_value = animation.original_value
+				animation.end()
+				add_child(i)
+				return
 			i.active = false
-			add_child(i)
+			
 			animation.ended.connect(Callable(i,"start"))
 			i.original_value = animation.original_value
 			i.set_physics_process(false)
+			add_child(i)
 			return
 	
 	# Yayy finally
