@@ -25,6 +25,14 @@ func _physics_process(delta):
 	velocity += force * delta
 	displacement += velocity * delta
 	
+	# Check if node is gone
+	var wr = weakref(node)
+	
+	if !wr.get_ref():
+		set_physics_process(false)
+		queue_free()
+		return
+	
 	# Apply the math
 	
 	match typeof(node.get(propertie)):
